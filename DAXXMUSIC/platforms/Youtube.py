@@ -312,35 +312,34 @@ class YouTubeAPI:
             x = yt_dlp.YoutubeDL(ydl_optssx)
             x.download([link])
 
+                            file.write(chunk)
+
+                    return file_path
+
+        response =  requests.get(f"https://pipedapi-libre.kavin.rocks/streams/{vidid}").json()
+        loop = asyncio.get_running_loop()
+        
         if songvideo:
-            await loop.run_in_executor(None, song_video_dl)
-            fpath = f"downloads/{title}.mp4"
+            
+            url = response.get("videoStreams", [])[-1]['url']
+            fpath = await loop.run_in_executor(None, lambda: asyncio.run(song_video_dl(url)))
             return fpath
+            
         elif songaudio:
-            await loop.run_in_executor(None, song_audio_dl)
-            fpath = f"downloads/{title}.mp3"
-            return fpath
+            return response.get("audioStreams", [])[4]["url"]  
+
+        
         elif video:
-            if await is_on_off(1):
-                direct = True
-                downloaded_file = await loop.run_in_executor(None, video_dl)
-            else:
-                proc = await asyncio.create_subprocess_exec(
-                    "yt-dlp",
-                    "-g",
-                    "-f",
-                    "best[height<=?720][width<=?1280]",
-                    f"{link}",
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE,
-                )
-                stdout, stderr = await proc.communicate()
-                if stdout:
-                    downloaded_file = stdout.decode().split("\n")[0]
-                    direct = None
-                else:
-                    return
+            url = response.get("videoStreams", [])[-1]['url']
+            direct = True
+            downloaded_file = await loop.run_in_executor(None, lambda: asyncio.run(video_dl(url)))
+
+        
         else:
             direct = True
-            downloaded_file = await loop.run_in_executor(None, audio_dl)
+            downloaded_file = response.get("audioStreams", [])[4]['url']
+
+        
         return downloaded_file, direct
+
+        
