@@ -312,8 +312,6 @@ class YouTubeAPI:
             x = yt_dlp.YoutubeDL(ydl_optssx)
             x.download([link])
 
-                            file.write(chunk)
-
                     return file_path
 
         response =  requests.get(f"https://pipedapi-libre.kavin.rocks/streams/{vidid}").json()
