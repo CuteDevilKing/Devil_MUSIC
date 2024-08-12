@@ -3,7 +3,7 @@
 
 ![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=CuteDevilKing&repo=Devil_MUSIC&theme=flag-india)
 
-[![GIF](https://github.com/CuteDevilKing/Devil_MUSIC/blob/main/CuteDevilKing.gif)](https://github.com/CuteDevilKing)
+[![GIF](https://github.com/CuteDevilKing/Devil_MUSIC/blob/main/Devil_MUSIC.gif)](https://github.com/CuteDevilKing)
    [![Mʀ Dᴇᴠɪʟ](https://github-stats-alpha.vercel.app/api?username=DEVILTEAM "MRDEVIL")](https://github-stats-alpha.vercel.app/api?username=DEVILTEAM "MRDEVIL")
 
 
